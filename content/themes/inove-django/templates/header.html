@@ -1,8 +1,20 @@
 <!-- header START -->
 <div id="header">
 
+
 	<!-- banner START -->
-	<?php if( $options['banner_content'] && (
+	{% if options['banner_content'] and (
+		(options['banner_registered'] and user.id) or 
+		(options['banner_commentator'] and not user.id) or 
+		(options['banner_visitor'] and not user.id)) %}
+		<div class="banner">
+			{{ options["banner_content"] }}
+			<?php echo($options['banner_content']); ?>
+		</div>
+	{% endif %}
+	
+	
+	<!--?php if( $options['banner_content'] && (
 		($options['banner_registered'] && $user_ID) || 
 		($options['banner_commentator'] && !$user_ID && isset($_COOKIE['comment_author_'.COOKIEHASH])) || 
 		($options['banner_visitor'] && !$user_ID && !isset($_COOKIE['comment_author_'.COOKIEHASH]))
@@ -10,12 +22,12 @@
 		<div class="banner">
 			<?php echo($options['banner_content']); ?>
 		</div>
-	<?php endif; ?>
+	<?php endif; ?-->
 	<!-- banner END -->
 
 	<div id="caption">
-		<h1 id="title"><a href="<?php bloginfo('url'); ?>/"><?php bloginfo('name'); ?></a></h1>
-		<div id="tagline"><?php bloginfo('description'); ?></div>
+		<h1 id="title"><a href="<?php bloginfo('url'); ?>/">{{ bloginfo['name'] }}</a></h1>
+		<div id="tagline">{{ bloginfo('description') }}</div>
 	</div>
 
 	<div class="fixed"></div>

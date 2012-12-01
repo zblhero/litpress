@@ -11,16 +11,19 @@ from django.core import serializers
 
 from litpress import settings
 from lp.models import usermeta
+from lp.models import posts as lp_posts
+from lp.models import options as lp_options
 
 
 def IndexView(request):
     template_name = 'index.html'
     dict = {}
-    if settings.USE_THEME:
-        theme_name = usermeta.objects.get(meta_key = "theme").meta_value
-        theme_dir = settings.BASE_DIR + "/../content/themes/"+theme_name
     
-    t = TemplateResponse(request, theme_dir + '/index.html')
+    posts = lp_posts.objects.all()
+    options = lp_options.objects.all()
+    dict['posts'] = posts
+    
+    t = TemplateResponse(request, 'index.html', dict)
     t.render()
     return t
 

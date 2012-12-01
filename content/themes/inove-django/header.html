@@ -14,7 +14,7 @@
 	<!-- default style -->
 	<style type="text/css" media="screen">@import url( {{STATIC_URL}} );</style>
 	<!-- for translations -->
-	<link rel="stylesheet" href="{{STATIC_URL}}/chinese.css" type="text/css" media="screen" />
+	<link rel="stylesheet" href="{{STATIC_URL}}chinese.css" type="text/css" media="screen" />
 
 	<!--[if IE]>
 		<link rel="stylesheet" href="{{STATIC_URL}}/ie.css" type="text/css" media="screen" />
@@ -22,8 +22,8 @@
 	<!-- style END -->
 
 	<!-- script START -->
-	<script type="text/javascript" src="{{STATIC_URL}}/js/base.js"></script>
-	<script type="text/javascript" src="{{STATIC_URL}}/js/menu.js"></script>
+	<script type="text/javascript" src="{{STATIC_URL}}js/base.js"></script>
+	<script type="text/javascript" src="{{STATIC_URL}}js/menu.js"></script>
 	<!-- script END -->
 
 	<?php wp_head(); ?>
@@ -38,7 +38,7 @@
 <!-- container START -->
 <div id="container" <?php if($options['nosidebar'] || $inove_nosidebar){echo 'class="one-column"';} ?> >
 
-{% include('templates/header.html'); %>
+{% include 'templates/header.html' %}
 
 <!-- content START -->
 <div id="content">

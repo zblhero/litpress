@@ -65,9 +65,18 @@ STATIC_ROOT = ''
 # Example: "http://example.com/static/", "http://static.example.com/"
 STATIC_URL = '/static/'
 
+
+USE_THEME = True
+theme_dir = "/"
+if USE_THEME:
+    from lp.models import usermeta
+    theme_name = usermeta.objects.get(meta_key = "theme").meta_value
+    theme_dir = "/themes/"+theme_name
+
 # Additional locations of static files
 STATICFILES_DIRS = (
     BASE_DIR + '/../static/',
+    BASE_DIR + '/../content' + theme_dir,
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -106,8 +115,9 @@ ROOT_URLCONF = 'litpress.urls'
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'litpress.wsgi.application'
 
+
 TEMPLATE_DIRS = (
-    BASE_DIR + '/../content',
+    BASE_DIR + '/../content' + theme_dir,
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -155,6 +165,3 @@ LOGGING = {
         },
     }
 }
-
-
-USE_THEME = True
